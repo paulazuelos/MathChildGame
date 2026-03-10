@@ -17,6 +17,7 @@ from PySide6.QtCore import Qt
 SAVE_FILE = "progression_jeu.json"
 EXERCICES = ["addition", "soustraction", "multiplication", "nombres", "problem","operationEuro"]
 NB_QUESTIONS_NIVEAU=10
+NIVEAU_ENFANT = ["CP","CE1","CE2","CM1","CM2"] #TODO
 class Donnees:
 
     def __init__(self):
@@ -293,17 +294,49 @@ class Jeu(QWidget):
 
     def nombre(self):
 
-        max_centaines = min(9, self.data.niveau + 1)
+        niveau = self.data.niveau
 
-        c = random.randint(1, max_centaines)
-        d = random.randint(0, 9)
-        u = random.randint(0, 9)
+        if niveau < 2:
+            # Dizaines + unités
+            d = random.randint(1, 9)
+            u = random.randint(0, 9)
+            self.question.setText(f"{d} dizaines + {u} unités = ?")
+            self.solution = d * 10 + u
 
-        self.question.setText(
-            f"{c} centaines + {d} dizaines + {u} unités = ?"
-        )
+        elif niveau < 3:
+            # Centaines + dizaines + unités
+            c = random.randint(1, 9)
+            d = random.randint(0, 9)
+            u = random.randint(0, 9)
+            self.question.setText(f"{c} centaines + {d} dizaines + {u} unités = ?")
+            self.solution = c * 100 + d * 10 + u
 
-        self.solution = c*100 + d*10 + u
+        elif niveau < 4:
+            # Inverse : combien d'unités / dizaines dans un nombre à 2 chiffres
+            d = random.randint(1, 9)
+            u = random.randint(0, 9)
+            nombre = d * 10 + u
+            question = random.choice([
+                (f"Combien y a-t-il de dizaines dans {nombre} ?", d),
+                (f"Combien y a-t-il d'unités dans {nombre} ?",   u),
+            ])
+            self.question.setText(question[0])
+            self.solution = question[1]
+
+        elif niveau < 6:
+            # Inverse : combien d'unités / dizaines / centaines dans un nombre à 3 chiffres
+            c = random.randint(1, 9)
+            d = random.randint(0, 9)
+            u = random.randint(0, 9)
+            nombre = c * 100 + d * 10 + u
+            question = random.choice([
+                (f"Combien y a-t-il de centaines dans {nombre} ?", c),
+                (f"Combien y a-t-il de dizaines dans {nombre} ?",  d),
+                (f"Combien y a-t-il d'unités dans {nombre} ?",     u),
+            ])
+            self.question.setText(question[0])
+            self.solution = question[1]
+
         self.type = "nombres"
 
     def operationEuro(self):
