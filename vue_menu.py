@@ -36,7 +36,7 @@ class Menu(QWidget):
         layout.setSpacing(10)
 
         # ── Titre ─────────────────────────────────────────────────────────────
-        titre = QLabel("🎮 Les Maths pour Juliette")
+        titre = QLabel("🎮 Progresser en Maths")
         titre.setAlignment(Qt.AlignCenter)
         titre.setStyleSheet("font-size:26px; color:darkblue; font-weight:bold;")
         layout.addWidget(titre)

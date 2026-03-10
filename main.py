@@ -46,7 +46,7 @@ class Fenetre(QWidget):
         )
 
         # ── 5. Paramètres fenêtre ─────────────────────────────────────────────
-        self.setWindowTitle("Les Maths pour Juliette")
+        self.setWindowTitle("Progresser en Maths")
         self.resize(540, 520)
 
     # ── Transitions ──────────────────────────────────────────────────────────
