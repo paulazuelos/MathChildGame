@@ -14,7 +14,7 @@ NIVEAUX_SCOLAIRES = ["CP", "CE1", "CE2", "CM1", "CM2"]
 # Correspondance niveau scolaire -> plage de niveaux numériques
 NIVEAUX_PAR_CLASSE = {
     "CP":  range(1, 3),
-    "CE1": range(2, 4),
+    "CE1": range(1, 8),
     "CE2": range(3, 6),
     "CM1": range(5, 8),
     "CM2": range(7, 11),
